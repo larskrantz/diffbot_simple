@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "autotest-standalone"
+  spec.add_development_dependency "webmock", "~> 1.17"
 
   spec.add_runtime_dependency "rest-core"
   spec.add_runtime_dependency "rest-client"
