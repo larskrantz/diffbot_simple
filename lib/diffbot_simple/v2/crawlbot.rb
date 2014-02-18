@@ -40,7 +40,6 @@ module DiffbotSimple::V2
 		# @name [String] name of the crawl to pause
 		# @return [Hash] with current parameters for the single crawl
 		def pause name: nil
-			raise ArgumentError.new "Must pass a name for the crawl to pause" unless name
 			single_crawl name: name, pause: 1
 		end
 
@@ -49,8 +48,16 @@ module DiffbotSimple::V2
 		# @name [String] name of the crawl to unpause
 		# @return [Hash] with current parameters for the single crawl
 		def unpause name: nil
-			raise ArgumentError.new "Must pass a name for the crawl to unpause" unless name
 			single_crawl name: name, pause: 0
+		end
+
+		# Restarts a crawl
+		#
+		# @name [String] name of the crawl to restart
+		# @return [Hash] with current parameters for the crawl in jobs-key (as an array), and a response-text
+		def restart name: nil
+			raise ArgumentError.new "Must pass a name for the crawl to restart" unless name
+			execute_call name: name, restart: 1
 		end
 		private
 		attr_reader :token, :api_client

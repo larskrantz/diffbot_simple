@@ -52,5 +52,13 @@ module DiffbotSimple::V2
 				expect(stubbed_unpause_request).to have_been_requested
 			end
 		end
+		context "when restarting a named crawl" do
+			let(:restart) { stubbed_request; subject.restart name: name }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, restart: 1 }).to_return(single_crawl_response_body) }
+			it "should make the request to restart it" do
+				restart
+				expect(stubbed_request).to have_been_requested
+			end
+		end
 	end
 end
