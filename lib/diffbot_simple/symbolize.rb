@@ -8,6 +8,7 @@ module DiffbotSimple
     end
 
     def symbolize hash
+    	return unless hash.kind_of? Hash
       sym_hash = y_combinator do |&f| 
       	lambda do |h|
 	      	if h.kind_of? Array
