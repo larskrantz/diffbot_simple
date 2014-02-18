@@ -14,5 +14,14 @@ module DiffbotSimple::V2
 				expect(all).to eql({jobs: [{ foo: 'bar' }]})
 			end
 		end
+		context "when asking for a named crawl" do
+			let(:name) { "crawl_name"}
+			let(:named_crawl) { stubbed_request; subject.get_crawl name: name }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token }).to_return(body: '{"foo":"bar"}') }
+			it "should make a request to /crawl with the token and name as arguments" do
+				named_crawl
+				expect(stubbed_request).to have_been_requested
+			end
+		end
 	end
 end
