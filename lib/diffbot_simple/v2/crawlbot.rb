@@ -11,9 +11,7 @@ module DiffbotSimple::V2
 		#
 		# @return [Array] your jobs from the "jobs"-array in api response
 		def all
-			response = api_client.get "crawl", {token: token}
-			symbolized_json = symbolize response
-			symbolized_json[:jobs]
+			execute_call()[:jobs]
 		end
 		# Gets, creates or updates a named crawl
 		#
@@ -22,13 +20,16 @@ module DiffbotSimple::V2
 		# @return [Hash] with current parameters for the single crawl
 		def single_crawl name: nil, options: {}
 			raise ArgumentError.new "Must pass a name for the crawl" unless name
-			args = options.merge({token: token, name: name})
-			response = api_client.get "crawl", args
-			symbolized_json = symbolize response
-			jobs = symbolized_json[:jobs]
+			response = execute_call options.merge(name: name)
+			jobs = response[:jobs]
 			jobs.first
 		end
 		private
 		attr_reader :token, :api_client
+		def execute_call **options
+			args = options.merge({token: token})
+			response = api_client.get "crawl", args
+			symbolize response
+		end
 	end
 end
