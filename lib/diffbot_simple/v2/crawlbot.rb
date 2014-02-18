@@ -13,6 +13,7 @@ module DiffbotSimple::V2
 		def all
 			execute_call()[:jobs]
 		end
+		
 		# Gets, creates or updates a named crawl
 		#
 		# @name [String] name of the crawl to get/create/update
@@ -23,6 +24,15 @@ module DiffbotSimple::V2
 			response = execute_call options.merge(name: name)
 			jobs = response[:jobs]
 			jobs.first
+		end
+
+		# Deletes a crawl
+		#
+		# @name [String] name of crawl to delete
+		# @return [Hash] statusmessage from diffbot, for example: {response: "Successfully deleted job."}
+		def delete name: nil
+			raise ArgumentError.new "Must pass a name for the crawl to delete" unless name
+			execute_call name: name, delete: 1
 		end
 		private
 		attr_reader :token, :api_client
