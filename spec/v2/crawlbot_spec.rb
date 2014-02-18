@@ -5,8 +5,8 @@ module DiffbotSimple::V2
 		let(:subject) { client.crawlbot }
 		context "when retreiving all crawls" do
 			let(:all) { stubbed_request;subject.all; }
-			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl?token=#{token}").to_return( body: '{"jobs":[{"foo":"bar"}]}', status: 200) }
-			it "should make an request to /crawl with the token as argument" do
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: {token: token}).to_return( body: '{"jobs":[{"foo":"bar"}]}', status: 200) }
+			it "should make a request to /crawl with the token as argument" do
 				all
 				expect(stubbed_request).to have_been_requested
 			end
