@@ -16,8 +16,8 @@ module DiffbotSimple::V2
 		end
 		context "when asking for a named crawl" do
 			let(:name) { "crawl_name"}
-			let(:named_crawl) { stubbed_request; subject.single_crawl name: name }
-			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token }).to_return(body: '{"jobs":[{"foo":"bar"}]}') }
+			let(:named_crawl) { stubbed_request; subject.single_crawl name: name, options: {onlyProcessIfNew: 0} }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, onlyProcessIfNew: 0 }).to_return(body: '{"jobs":[{"foo":"bar"}]}') }
 			it "should make a request to /crawl with the token and name as arguments" do
 				named_crawl
 				expect(stubbed_request).to have_been_requested
