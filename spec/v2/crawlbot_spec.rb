@@ -10,17 +10,20 @@ module DiffbotSimple::V2
 				all
 				expect(stubbed_request).to have_been_requested
 			end
-			it "should return a symbolize hash" do
-				expect(all).to eql({jobs: [{ foo: 'bar' }]})
+			it "should return an crawl array " do
+				expect(all).to eql([{ foo: 'bar' }])
 			end
 		end
 		context "when asking for a named crawl" do
 			let(:name) { "crawl_name"}
-			let(:named_crawl) { stubbed_request; subject.get_crawl name: name }
-			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token }).to_return(body: '{"foo":"bar"}') }
+			let(:named_crawl) { stubbed_request; subject.single_crawl name: name }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token }).to_return(body: '{"jobs":[{"foo":"bar"}]}') }
 			it "should make a request to /crawl with the token and name as arguments" do
 				named_crawl
 				expect(stubbed_request).to have_been_requested
+			end
+			it "should return an crawl hash" do
+				expect(named_crawl).to eql({ foo: 'bar' })
 			end
 		end
 	end
