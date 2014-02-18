@@ -59,6 +59,18 @@ module DiffbotSimple::V2
 			raise ArgumentError.new "Must pass a name for the crawl to restart" unless name
 			execute_call name: name, restart: 1
 		end
+
+		# Get the crawl-result (downloadJson from diffbot crawl)
+		#
+		# @name [String] name of the crawl to restart
+		# @return [Array] of results (hashes)
+		def result name: name
+			crawl = single_crawl name: name
+			download_url = crawl[:downloadJson]
+			response = api_client.get download_url
+			symbolize response
+		end
+		
 		private
 		attr_reader :token, :api_client
 		def execute_call **options

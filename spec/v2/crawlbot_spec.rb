@@ -60,5 +60,16 @@ module DiffbotSimple::V2
 				expect(stubbed_request).to have_been_requested
 			end
 		end
+		context "when requesting a crawls result" do
+			let(:result) { stubbed_crawl_request;stubbed_result_request; subject.result name: name }
+			let(:test_download_url) { "http://google.com" }
+			let(:stubbed_crawl_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token}).to_return(body: "{\"jobs\":[{\"downloadJson\":\"#{test_download_url}\"}]}") }
+			let(:stubbed_result_request) { stub_request(:get, test_download_url).to_return(body: "[{'f':'b'}]") }
+			it "should make the two requests to get the results" do
+				result
+				expect(stubbed_crawl_request).to have_been_requested
+				expect(stubbed_result_request).to have_been_requested
+			end
+		end
 	end
 end
