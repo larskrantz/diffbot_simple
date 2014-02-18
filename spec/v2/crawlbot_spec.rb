@@ -38,5 +38,19 @@ module DiffbotSimple::V2
 				expect(delete).to eql({response: "Successfully deleted job."})
 			end
 		end
+		context "when pausing or unpausing a named crawl" do
+			let(:pause) { stubbed_pause_request; subject.pause name: name }
+			let(:unpause) { stubbed_unpause_request; subject.unpause name: name }
+			let(:stubbed_pause_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, pause: 1 }).to_return(single_crawl_response_body) }
+			let(:stubbed_unpause_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, pause: 0 }).to_return(single_crawl_response_body) }
+			it "should make the request to pause it" do
+				pause
+				expect(stubbed_pause_request).to have_been_requested
+			end
+			it "should make the request to unpause it" do
+				unpause
+				expect(stubbed_unpause_request).to have_been_requested
+			end
+		end
 	end
 end
