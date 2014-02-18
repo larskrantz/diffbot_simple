@@ -17,3 +17,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 end
+
+def base_url 
+	"http://api.diffbot.com/v2"
+end
+def token
+	"TestToken"
+end
