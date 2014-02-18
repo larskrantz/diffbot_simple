@@ -2,11 +2,12 @@ require 'spec_helper'
 module DiffbotSimple::V2
 	describe Crawlbot do
 		let(:client) { Client.new token: token }
+		let(:single_crawl_response_body) {{body: '{"jobs":[{"foo":"bar"}]}'}}
 		let(:name) { "crawl_name"}
 		let(:subject) { client.crawlbot }
 		context "when retreiving all crawls" do
 			let(:all) { stubbed_request;subject.all; }
-			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: {token: token}).to_return( body: '{"jobs":[{"foo":"bar"}]}', status: 200) }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: {token: token}).to_return( single_crawl_response_body) }
 			it "should make a request to /crawl with the token as argument" do
 				all
 				expect(stubbed_request).to have_been_requested
@@ -16,8 +17,8 @@ module DiffbotSimple::V2
 			end
 		end
 		context "when asking for a named crawl" do
-			let(:named_crawl) { stubbed_request; subject.single_crawl name: name, options: {onlyProcessIfNew: 0} }
-			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, onlyProcessIfNew: 0 }).to_return(body: '{"jobs":[{"foo":"bar"}]}') }
+			let(:named_crawl) { stubbed_request; subject.single_crawl name: name, onlyProcessIfNew: 0 }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/crawl").with(query: { name: name, token: token, onlyProcessIfNew: 0 }).to_return single_crawl_response_body() }
 			it "should make a request to /crawl with the token and name as arguments" do
 				named_crawl
 				expect(stubbed_request).to have_been_requested

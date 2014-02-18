@@ -17,9 +17,9 @@ module DiffbotSimple::V2
 		# Gets, creates or updates a named crawl
 		#
 		# @name [String] name of the crawl to get/create/update
-		# @options [Hash] options from http://www.diffbot.com/dev/docs/crawl/ when updating or creating a crawl
+		# @**options options from http://www.diffbot.com/dev/docs/crawl/ when updating or creating a crawl
 		# @return [Hash] with current parameters for the single crawl
-		def single_crawl name: nil, options: {}
+		def single_crawl name: nil, **options
 			raise ArgumentError.new "Must pass a name for the crawl" unless name
 			response = execute_call options.merge(name: name)
 			jobs = response[:jobs]
