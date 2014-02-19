@@ -71,5 +71,42 @@ module DiffbotSimple::V2
 				expect(stubbed_result_request).to have_been_requested
 			end
 		end
+		describe "if diffbots response is an error" do
+			let(:error_from_diffbot) { { error: "Your token has exceeded the allowed number of calls, or has otherwise been throttled for API abuse.", errorCode: 429 }.to_json }
+			let(:stubbed_request) { stub_request(:get, /#{base_url}\/crawl*/).to_return(body: error_from_diffbot) }
+			shared_examples_for "an error" do
+				it "and raise an DiffbotError" do
+					expect{raiser}.to raise_error DiffbotError
+				end
+			end
+			context "on all" do
+				let(:raiser) { stubbed_request;subject.all; }
+				it_should_behave_like "an error"
+			end
+			context "on single_crawl" do
+				let(:raiser) { stubbed_request;subject.single_crawl name: name; }
+				it_should_behave_like "an error"
+			end
+			context "on delete" do
+				let(:raiser) { stubbed_request;subject.delete name: name; }
+				it_should_behave_like "an error"
+			end
+			context "on pause" do
+				let(:raiser) { stubbed_request;subject.pause name: name; }
+				it_should_behave_like "an error"
+			end
+			context "on unpause" do
+				let(:raiser) { stubbed_request;subject.unpause name: name; }
+				it_should_behave_like "an error"
+			end
+			context "on restart" do
+				let(:raiser) { stubbed_request;subject.restart name: name; }
+				it_should_behave_like "an error"
+			end
+			context "on result" do
+				let(:raiser) { stubbed_request;subject.result name: name; }
+				it_should_behave_like "an error"
+			end
+		end
 	end
 end

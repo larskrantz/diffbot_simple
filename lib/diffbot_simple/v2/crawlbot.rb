@@ -70,13 +70,19 @@ module DiffbotSimple::V2
 			response = api_client.get download_url
 			symbolize response
 		end
-		
+
 		private
 		attr_reader :token, :api_client
 		def execute_call **options
 			args = options.merge({token: token})
 			response = api_client.get "crawl", args
-			symbolize response
+			result_hash = symbolize response
+			raise_if_error_response result_hash
+			result_hash
+		end
+		def raise_if_error_response result_from_diffbot
+			return unless result_from_diffbot[:error]
+			raise DiffbotError.new(result_from_diffbot[:error], result_from_diffbot[:errorCode])
 		end
 	end
 end
