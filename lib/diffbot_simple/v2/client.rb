@@ -9,6 +9,9 @@ module DiffbotSimple::V2
 		def crawlbot
 			Crawlbot.new api_client: api_client, token: token
 		end
+		def article
+			Article.new api_client: api_client, token: token
+		end
 		private
 		attr_reader :token, :api_client
 	end
