@@ -39,5 +39,12 @@ module DiffbotSimple::V2
 			let(:stubbed_request) { stub_request(:get, "#{base_url}/article").with(query: {token: token, url: url }, headers: { "X-Forward-User-Agent" => "I AM CHROME" }).to_return(single_article_response) }
 			it_should_behave_like "an article request"
 		end
+
+		context "when posting a body directly to analyze" do
+			let(:body) { "<html><fake><body>" }
+			let(:subject) { article.single_article url: url, body: body }
+			let(:stubbed_request) { stub_request(:post, "#{base_url}/article").with(query: {token: token, url: url }, body: body).to_return(single_article_response) }
+			it_should_behave_like "an article request"
+		end
 	end
 end
