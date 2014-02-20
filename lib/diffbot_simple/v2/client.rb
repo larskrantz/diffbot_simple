@@ -15,6 +15,9 @@ module DiffbotSimple::V2
 		def custom name: nil
 			Custom.new api_client: api_client, token: token, name: name
 		end
+		def product
+			Product.new api_client: api_client, token: token
+		end
 		private
 		attr_reader :token, :api_client
 	end
