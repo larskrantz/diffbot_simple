@@ -3,7 +3,7 @@ module DiffbotSimple::V2
 	class Product
 		include ApiHelper
 		def single_product url: nil, **options
-			raise ArgumentError.new "Must pass an url for the product api to fetch" unless url
+			raise ArgumentError.new "Must pass an url to fetch" unless url
 			execute_call options.merge(url: url, api: :product)
 		end
 	end
