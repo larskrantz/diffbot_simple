@@ -12,6 +12,9 @@ module DiffbotSimple::V2
 		def article
 			Article.new api_client: api_client, token: token
 		end
+		def custom name: nil
+			Custom.new api_client: api_client, token: token, name: name
+		end
 		private
 		attr_reader :token, :api_client
 	end
