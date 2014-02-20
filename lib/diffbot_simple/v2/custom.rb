@@ -1,5 +1,5 @@
 module DiffbotSimple::V2
-	# Complies to http://www.diffbot.com/dev/docs/article
+	# Complies to http://www.diffbot.com/dev/docs/custom
 	class Custom
 		include ApiHelper
 		attr_reader :name
