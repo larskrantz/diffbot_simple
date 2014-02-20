@@ -34,5 +34,10 @@ module DiffbotSimple::V2
 			let(:stubbed_request) { stub_request(:get, "#{base_url}/article").with(query: {token: token, url: url, fields: "meta,querystring,images(*)" }).to_return(single_article_response) }
 			it_should_behave_like "an article request"
 		end
+		context "when asking for a single article with custom headers" do
+			let(:subject) { article.single_article url: url, custom_headers: { "X-Forward-User-Agent" => "I AM CHROME" } }
+			let(:stubbed_request) { stub_request(:get, "#{base_url}/article").with(query: {token: token, url: url }, headers: { "X-Forward-User-Agent" => "I AM CHROME" }).to_return(single_article_response) }
+			it_should_behave_like "an article request"
+		end
 	end
 end

@@ -8,9 +8,11 @@ module DiffbotSimple::V2
 		end
 		private
 		attr_reader :token, :api_client
-		def execute_call api: nil, **options
+		def execute_call api: nil, custom_headers: nil, **options
 			args = options.merge({token: token})
-			response = api_client.get api, args
+			opts = {}
+			opts[:headers] = custom_headers if custom_headers
+			response = api_client.get(api, args, opts)
 			result_hash = symbolize response
 			raise_if_error_response result_hash
 			result_hash
