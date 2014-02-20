@@ -18,6 +18,9 @@ module DiffbotSimple::V2
 		def product
 			Product.new api_client: api_client, token: token
 		end
+		def image
+			Image.new api_client: api_client, token: token
+		end
 		private
 		attr_reader :token, :api_client
 	end

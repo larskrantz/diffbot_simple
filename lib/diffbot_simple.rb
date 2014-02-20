@@ -7,6 +7,7 @@ require 'diffbot_simple/v2/crawlbot'
 require 'diffbot_simple/v2/article'
 require 'diffbot_simple/v2/custom'
 require 'diffbot_simple/v2/product'
+require 'diffbot_simple/v2/image'
 
 module DiffbotSimple
 end
