@@ -8,6 +8,7 @@ require 'diffbot_simple/v2/article'
 require 'diffbot_simple/v2/custom'
 require 'diffbot_simple/v2/product'
 require 'diffbot_simple/v2/image'
+require 'diffbot_simple/v2/analyze'
 
 module DiffbotSimple
 end

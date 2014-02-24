@@ -21,6 +21,9 @@ module DiffbotSimple::V2
 		def image
 			Image.new api_client: api_client, token: token
 		end
+		def analyze
+			Analyze.new api_client: api_client, token: token
+		end
 		private
 		attr_reader :token, :api_client
 	end
