@@ -1,10 +1,9 @@
 module DiffbotSimple::V2
 	# Complies to http://www.diffbot.com/dev/docs/crawl/
 	class Crawlbot
-		include DiffbotSimple::Symbolize
-		def initialize api_client: nil, token: nil
-			@api_client = api_client
-			@token = token
+		include ApiHelper
+		def post_initialize
+			@api = :crawl
 		end
 		# Get all your crawls as an array
 		# The "jobs" parameter is stripped and only the array is returned
@@ -71,18 +70,6 @@ module DiffbotSimple::V2
 			symbolize response
 		end
 
-		private
-		attr_reader :token, :api_client
-		def execute_call **options
-			args = options.merge({token: token})
-			response = api_client.get "crawl", args
-			result_hash = symbolize response
-			raise_if_error_response result_hash
-			result_hash
-		end
-		def raise_if_error_response result_from_diffbot
-			return unless result_from_diffbot[:error]
-			raise DiffbotError.new(result_from_diffbot[:error], result_from_diffbot[:errorCode])
-		end
+
 	end
 end

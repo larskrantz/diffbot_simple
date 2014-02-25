@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = DiffbotSimple::VERSION
   spec.authors       = ["Lars Krantz"]
   spec.email         = ["lars.krantz@alaz.se"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{A simple, nothing-fancy, helper for the Diffbot API}
+  # spec.description   = %q{}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -26,8 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "autotest-standalone"
   spec.add_development_dependency "webmock", "~> 1.17"
 
-  spec.add_runtime_dependency "rest-core"
-  spec.add_runtime_dependency "rest-client"
+  spec.add_runtime_dependency "rest-core", "~> 2.1"
   spec.add_runtime_dependency "multi_json"
 
 end
