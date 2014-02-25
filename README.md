@@ -6,8 +6,10 @@ DiffbotSimple
 =============
 
 A simple, nothing-fancy, helper for the [Diffbot API](http://www.diffbot.com/).
+
 Will not objectify any responses, just pass on the json data as hash with symbolized keys.
 One exception to that rule, when using CrawlBot and requesting a single_crawl, it will return the single item in the :jobs-array, and when requesting all, it will return the array in :jobs.
+Send options to the api as named args, se usage below with article and fields-argument.
 
 ## Installation
 ```ruby
@@ -21,7 +23,6 @@ gem 'diffbot-simple'
 
 
 ## Usage
-
 ```ruby
 require 'diffbot_simple'
 
@@ -30,7 +31,8 @@ client = DiffbotSimple::V2::Client.new token: token
 
 article = client.article
 url = "http://www.xconomy.com/san-francisco/2012/07/25/diffbot-is-using-computer-vision-to-reinvent-the-semantic-web/"
-diffbot_response_as_symbolized_hash = article.single_article url: url   
+# Pass on diffbot parameters as options to the call
+diffbot_response_as_symbolized_hash = article.single_article url: url, fields: "icon,title"
 # =>
 {
   icon: "http://www.xconomy.com/wordpress/wp-content/themes/xconomy/images/favicon.ico",
@@ -41,7 +43,7 @@ diffbot_response_as_symbolized_hash = article.single_article url: url
 }
 ```
 
-## Supports these Diffbot apis
+### Supports these Diffbot apis
 Please see [Diffbot Help and Documentation](http://www.diffbot.com/dev/docs/) for details and arguments.
 Check the spec-directory too.
 
@@ -76,8 +78,11 @@ response = product.single_product url: url
 crawlbot = client.crawlbot
 all_my_crawls = crawlbot.all
 current_settings = crawlbot.single_crawl name: "my_crawl"
-# shorthand for using apiUrl, use the api object from client, it will create a correct value for you (custom, image, article, product or analyze for automatic)
-get_create_or_update_a_crawl = crawlbot.single_crawl name: "my_new_crawl", onlyProcessIfNew: 0, seeds: "http://www.upptec.se", apiUrl: custom
+# shorthand for using apiUrl, use the api object from client, 
+# it will create a correct value for you 
+# (custom, image, article, product or analyze for automatic)
+# A call to single_crawl will create if not exists or update settings
+settings = crawlbot.single_crawl name: "my_new_crawl", onlyProcessIfNew: 0, seeds: "http://www.upptec.se", apiUrl: custom
 crawlbot.pause name: "my_new_crawl"
 crawlbot.unpause name: "my_new_crawl"
 crawlbot.restart name: "my_new_crawl"
@@ -85,7 +90,7 @@ result = crawlbot.result "my_new_crawl" # shorthand for downloading the json tha
 crawlbot.delete name: "my_new_crawl" 
 ```
 
-## On error
+### On error
 If Diffbot returns an error, it will raise and fill `DiffbotSimple::V2::DiffbotError` with passed on info, as stated in [http://www.diffbot.com/dev/docs/error/](http://www.diffbot.com/dev/docs/error/) and put errorCode in `:error_code` and error in `:message` .
 
 ## TODO
