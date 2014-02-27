@@ -1,10 +1,11 @@
 require_relative 'api_client'
 module DiffbotSimple::V2
 	class Client
-		def initialize token: nil
+		def initialize token: nil, bulk_factory: nil, api_client: nil
 			raise ArgumentError.new("Must supply developer token") if token.to_s.empty?
 			@token = token
-			@api_client = ApiClient.new
+			@api_client = api_client ||= ApiClient.new
+			@bulk_factory = bulk_factory ||= BulkFactory.new(api_client: api_client, token: token)
 		end
 		def crawlbot
 			Crawlbot.new api_client: api_client, token: token
@@ -26,11 +27,9 @@ module DiffbotSimple::V2
 		end
 		def bulk name: nil
 			return bulk_factory.all unless name
+			return bulk_factory.single name: name
 		end
 		private
-		attr_reader :token, :api_client
-		def bulk_factory
-			BulkFactory.new api_client: api_client, token: token
-		end
+		attr_reader :token, :api_client, :bulk_factory
 	end
 end
