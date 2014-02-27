@@ -24,7 +24,13 @@ module DiffbotSimple::V2
 		def analyze
 			Analyze.new api_client: api_client, token: token
 		end
+		def bulk name: nil
+			return bulk_factory.all unless name
+		end
 		private
 		attr_reader :token, :api_client
+		def bulk_factory
+			BulkFactory.new api_client: api_client, token: token
+		end
 	end
 end
