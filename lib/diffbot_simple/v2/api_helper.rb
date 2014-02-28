@@ -1,5 +1,4 @@
 module DiffbotSimple::V2
-	# Complies to http://www.diffbot.com/dev/docs/crawl/
 	module ApiHelper
 		include DiffbotSimple::Symbolize
 		def initialize api_client: nil, token: nil
