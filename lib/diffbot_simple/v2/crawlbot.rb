@@ -61,9 +61,9 @@ module DiffbotSimple::V2
 
 		# Get the crawl-result (downloadJson from diffbot crawl)
 		#
-		# @name [String] name of the crawl to restart
+		# @name [String] name of the crawl to get
 		# @return [Array] of results (hashes)
-		def result name: name
+		def result name: nil
 			crawl = single_crawl name: name
 			download_url = crawl[:downloadJson]
 			response = api_client.get download_url
