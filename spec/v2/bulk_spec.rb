@@ -17,7 +17,7 @@ module DiffbotSimple::V2
 			end
 		end
 		context "when deleting" do
-			it "should send delete = 0 to bulk api" do
+			it "should send delete = 1 to bulk api" do
 				expect(bulk_api).to receive(:single).with(name: name, delete: 1).and_return({})
 				subject.delete!
 			end
