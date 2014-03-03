@@ -22,6 +22,10 @@ module DiffbotSimple::V2
 			it "should return the jobs-array" do
 				expect(subject).to eql response[:jobs]
 			end
+			it "should make the stubbed_request" do
+				subject
+				expect(stubbed_request).to have_been_requested
+			end
 		end
 		context "when asking for a named bulk job" do
 			let(:subject) { bulk_api.single name: name }
