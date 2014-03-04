@@ -23,11 +23,9 @@ module DiffbotSimple::V2
 			send_to_api parameters
 		end
 		def method_missing property, *args
-			super if args.empty?
-			h = {}
-			property = property.to_s.gsub /\=$/,""
-			h[property.to_sym] = args.join(",")
-			send_to_api h
+			property = property.to_s.gsub(/\=$/,"").to_sym
+			super unless parameters.has_key? property
+			send_to_api({ property => args.join(",") })
 		end
 		private
 		attr_reader :bulk_api
