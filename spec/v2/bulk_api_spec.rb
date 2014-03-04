@@ -4,7 +4,8 @@ module DiffbotSimple::V2
 		before(:each) { stubbed_request }
 		let(:bulk_api) { BulkApi.new token: token, api_client: ApiClient.new }
 		let(:response_body) { {body: MultiJson.dump(response) } }
-		let(:response) { {jobs: [{ foo: "bar" }]} }
+		let(:filtered_response) { response[:jobs].select { |e| e[:type] == "bulk"  } }
+		let(:response) { {jobs: [{ type: "bulk", foo: "bar" },{ type: "crawl", should_not: "return" }]} }
 		let(:name) { :my_bulk_job }
 		let(:bulk_url) { "#{base_url}/bulk" }
 		shared_examples_for "a correct single request" do
@@ -13,14 +14,14 @@ module DiffbotSimple::V2
 				expect(stubbed_request).to have_been_requested
 			end
 			it "should return a hashified response" do
-				expect(subject).to eql response[:jobs].first
+				expect(subject).to eql filtered_response.first
 			end
 		end
 		context "when asking for all bulk jobs" do
 			let(:subject) { bulk_api.all }
 			let(:stubbed_request) { stub_request(:get, bulk_url).with(query: {token: token}).to_return(response_body) }
 			it "should return the jobs-array" do
-				expect(subject).to eql response[:jobs]
+				expect(subject).to eql filtered_response
 			end
 			it "should make the stubbed_request" do
 				subject

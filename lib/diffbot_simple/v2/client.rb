@@ -26,8 +26,8 @@ module DiffbotSimple::V2
 			Analyze.new api_client: api_client, token: token
 		end
 		def bulk name: nil
-			return bulk_api.all.map { |e| Bulk.new e.merge(bulk_api: bulk_api)  } unless name
-			return Bulk.new (bulk_api.single name: name).merge(bulk_api: bulk_api)
+			return bulk_api.all.map { |e| Bulk.new name: e.delete(:name), init: e, bulk_api: bulk_api  } unless name
+			return Bulk.new name: name, bulk_api: bulk_api
 		end
 		private
 		attr_reader :token, :api_client, :bulk_api

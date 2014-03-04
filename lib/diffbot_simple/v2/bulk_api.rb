@@ -6,7 +6,7 @@ module DiffbotSimple::V2
 			@api = :bulk
 		end
 		def all
-			execute_call()[:jobs]
+			execute_call()[:jobs].select { |e| e[:type] == @api.to_s  }
 		end
 		def single name: nil, **options
 			response = execute_call options.merge(name: name)

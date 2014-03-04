@@ -1,10 +1,14 @@
 module DiffbotSimple::V2
 	class Bulk
 		attr_reader :parameters, :name
-		def initialize bulk_api: nil, name: nil, **parameters
+		def initialize bulk_api: nil, name: nil, init: {}, **parameters
 			@bulk_api = bulk_api
 			@name = name
-			@parameters = parameters
+		 	if init.empty?
+				send_to_api parameters
+			else
+				@parameters = init
+			end
 		end
 		def pause
 			send_to_api pause: 1
