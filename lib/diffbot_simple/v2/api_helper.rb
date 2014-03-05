@@ -33,7 +33,8 @@ module DiffbotSimple::V2
 			merged
 		end
 		def expand_api_url api_url
-			api_url.to_crawl_api_url if api_url.respond_to?(:to_crawl_api_url)
+			return api_url.to_crawl_api_url if api_url.respond_to?(:to_crawl_api_url)
+			return api_url
 		end
 		def raise_if_error_response result_from_diffbot
 			return unless result_from_diffbot[:error]

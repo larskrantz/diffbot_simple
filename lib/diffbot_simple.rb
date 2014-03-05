@@ -9,6 +9,8 @@ require 'diffbot_simple/v2/custom'
 require 'diffbot_simple/v2/product'
 require 'diffbot_simple/v2/image'
 require 'diffbot_simple/v2/analyze'
+require 'diffbot_simple/v2/bulk_api'
+require 'diffbot_simple/v2/bulk'
 
 module DiffbotSimple
 end
