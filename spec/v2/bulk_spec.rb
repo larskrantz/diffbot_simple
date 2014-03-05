@@ -3,7 +3,8 @@ module DiffbotSimple::V2
 	describe Bulk do
 		let(:bulk_api) { double("bulk_api") }
 		let(:name) { "test" }
-		let(:subject) { Bulk.new bulk_api: bulk_api, name: name }
+		let(:subject) { Bulk.new bulk_api: bulk_api, name: name}
+		before(:each) { expect(bulk_api).to receive(:single).with(name: name).and_return({ notifyEmail: nil, downloadJson: "download_url" }) }
 		context "when pausing" do
 			it "should send pause = 1 to bulk api" do
 				expect(bulk_api).to receive(:single).with(name: name, pause: 1).and_return({})
@@ -20,6 +21,12 @@ module DiffbotSimple::V2
 			it "should send delete = 1 to bulk api" do
 				expect(bulk_api).to receive(:single).with(name: name, delete: 1).and_return({})
 				subject.delete!
+			end
+		end
+		context "when downloading results" do
+			it "should call for results on bulk api" do
+				expect(bulk_api).to receive(:results).with(url: "download_url").and_return([])
+				subject.results
 			end
 		end
 		context "when updating general parameters" do

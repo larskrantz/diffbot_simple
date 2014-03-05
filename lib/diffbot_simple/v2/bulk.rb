@@ -22,6 +22,9 @@ module DiffbotSimple::V2
 		def update **parameters
 			send_to_api parameters
 		end
+		def results
+			bulk_api.results url: parameters[:downloadJson]
+		end
 		def method_missing property, *args
 			property = property.to_s.gsub(/\=$/,"").to_sym
 			super unless parameters.has_key? property

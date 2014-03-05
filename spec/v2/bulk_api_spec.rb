@@ -41,6 +41,14 @@ module DiffbotSimple::V2
 			let(:stubbed_request) { stub_request(:get, bulk_url).with(query: {token: token, name: name.to_s, apiUrl: api_url, urls: urls, notifyEmail: notifyEmail}).to_return(response_body) }
 			it_should_behave_like "a correct single request"
 		end
-
+		context "when asking for results for a named bulk job" do
+			let(:download_url) { "http://foo.bar" }
+			let(:subject) { bulk_api.results url: download_url }
+			let(:stubbed_request) { stub_request(:get, download_url).to_return([]) }
+			it "should make the stubbed_request" do
+				subject
+				expect(stubbed_request).to have_been_requested
+			end
+		end
 	end
 end

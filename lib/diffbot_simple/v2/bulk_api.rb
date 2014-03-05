@@ -10,7 +10,13 @@ module DiffbotSimple::V2
 		end
 		def single name: nil, **options
 			response = execute_call options.merge(name: name)
-			response[:jobs].first
+			return response[:jobs].select { |e| e[:type] == @api.to_s }.first if response.has_key?(:jobs)
+			response
+		end
+		def results url: nil
+			return [] unless url
+			response = api_client.get url
+			symbolize response
 		end
 	end
 end
