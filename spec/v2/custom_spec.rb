@@ -23,12 +23,12 @@ module DiffbotSimple::V2
 			end
 		end
 		context "when asking for a custom api with no options" do
-			let(:subject) { custom.single_custom url: url }
+			let(:subject) { custom.request url: url }
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url }).to_return(single_response) }
 			it_should_behave_like "a custom request"
 		end
 		context "when asking for a custom api with custom options" do
-			let(:subject) { custom.single_custom url: url, timeout: 12000, callback: "my_callback" }
+			let(:subject) { custom.request url: url, timeout: 12000, callback: "my_callback" }
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url, timeout: 12000, callback: "my_callback" }).to_return(single_response) }
 			it_should_behave_like "a custom request"
 		end

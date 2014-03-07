@@ -11,7 +11,7 @@ module DiffbotSimple::V2
 		def post_initialize
 			@api = "api/#{CGI::escape(name)}"
 		end
-		def single_custom url: nil, **options
+		def request url: nil, **options
 			raise ArgumentError.new "Must pass an url for the custom api to fetch" unless url
 			execute_call options.merge(url: url)
 		end

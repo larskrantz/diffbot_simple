@@ -57,7 +57,7 @@ url = "http://some_url_to_check"
 
 # Custom API
 custom = client.custom name: "my_custom_api_name" 
-response = custom.single_custom url: url 
+response = custom.request url: url 
 
 # Analyze API (beta)
 analysis = client.analyze 
