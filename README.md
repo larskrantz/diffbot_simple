@@ -33,7 +33,7 @@ client = DiffbotSimple::V2::Client.new token: token
 article = client.article
 url = "http://www.xconomy.com/san-francisco/2012/07/25/diffbot-is-using-computer-vision-to-reinvent-the-semantic-web/"
 # Pass on diffbot parameters as options to the call
-diffbot_response_as_symbolized_hash = article.single_article url: url, fields: "icon,title"
+diffbot_response_as_symbolized_hash = article.request url: url, fields: "icon,title"
 # =>
 {
   icon: "http://www.xconomy.com/wordpress/wp-content/themes/xconomy/images/favicon.ico",
@@ -65,7 +65,7 @@ response = analyze.single_analysis url: url
 
 # Article API
 article = client.article
-response = article.single_article url: url
+response = article.request url: url
 
 # Image API
 image = client.image
