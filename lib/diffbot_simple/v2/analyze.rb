@@ -9,9 +9,5 @@ module DiffbotSimple::V2
 			default = super
 			"#{default}?mode=auto"
 		end
-		def request url: nil, **options
-			raise ArgumentError.new "Must pass an url to fetch" unless url
-			execute_call options.merge(url: url)
-		end
 	end
 end

@@ -12,6 +12,11 @@ module DiffbotSimple::V2
 		def to_crawl_api_url
 			"#{api_client.site}#{api}"
 		end
+		# overload if necessary
+		def request url: nil, **options
+			raise ArgumentError.new "Must pass an url for the request to work" unless url
+			execute_call options.merge(url: url)
+		end
 		private
 		attr_reader :token, :api_client, :api
 		def execute_call custom_headers: nil, method: :get, payload: nil, **options
