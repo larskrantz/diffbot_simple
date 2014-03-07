@@ -18,6 +18,7 @@ module DiffbotSimple::V2
 		end
 		def delete!
 			send_to_api delete: 1
+			@parameters = {}
 		end
 		def restart
 			send_to_api restart: 1
