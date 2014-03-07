@@ -61,7 +61,7 @@ response = custom.single_custom url: url
 
 # Analyze API (beta)
 analysis = client.analyze 
-response = analyze.single_analysis url: url
+response = analyze.request url: url
 
 # Article API
 article = client.article

@@ -9,10 +9,9 @@ module DiffbotSimple::V2
 			default = super
 			"#{default}?mode=auto"
 		end
-		def single_analysis url: nil, **options
+		def request url: nil, **options
 			raise ArgumentError.new "Must pass an url to fetch" unless url
 			execute_call options.merge(url: url)
 		end
-		alias :single_analyze :single_analysis
 	end
 end

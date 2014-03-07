@@ -21,7 +21,7 @@ module DiffbotSimple::V2
 			end
 		end
 		context "when asking for an analyze with no options" do
-			let(:subject) { analyze.single_analysis url: url}
+			let(:subject) { analyze.request url: url}
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url}).to_return(single_response) }
 			it_should_behave_like "an analyze request"
 		end
@@ -29,7 +29,7 @@ module DiffbotSimple::V2
 			let(:fields) {"a,b,c"}
 			let(:mode) { "article" }
 			let(:stats) { true }
-			let(:subject) { analyze.single_analyze url: url, stats: stats, mode: mode, fields: fields }
+			let(:subject) { analyze.request url: url, stats: stats, mode: mode, fields: fields }
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url, stats: stats.to_s, mode: mode, fields: fields}).to_return(single_response) }
 			it_should_behave_like "an analyze request"
 		end
