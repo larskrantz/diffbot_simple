@@ -5,7 +5,7 @@ module DiffbotSimple::V2
 		def post_initialize
 			@api = :image
 		end
-		def single_image url: nil, **options
+		def request url: nil, **options
 			raise ArgumentError.new "Must pass an url to fetch" unless url
 			execute_call options.merge(url: url)
 		end

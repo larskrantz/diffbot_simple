@@ -21,7 +21,7 @@ module DiffbotSimple::V2
 			end
 		end
 		context "when asking for an image with no options" do
-			let(:subject) { image.single_image url: url}
+			let(:subject) { image.request url: url}
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url}).to_return(single_response) }
 			it_should_behave_like "an image request"
 		end
@@ -29,7 +29,7 @@ module DiffbotSimple::V2
 			let(:fields) {"a,b,c"}
 			let(:callback) { "my_callback" }
 			let(:timeout) { 4200 }
-			let(:subject) { image.single_image url: url, timeout: timeout, callback: callback, fields: fields }
+			let(:subject) { image.request url: url, timeout: timeout, callback: callback, fields: fields }
 			let(:stubbed_request) { stub_request(:get, api_url).with(query: {token: token, url: url, timeout: timeout, callback: callback, fields: fields}).to_return(single_response) }
 			it_should_behave_like "an image request"
 		end

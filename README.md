@@ -69,7 +69,7 @@ response = article.request url: url
 
 # Image API
 image = client.image
-response = image.single_image url: url
+response = image.request url: url
 
 # Product API
 product = client.product
