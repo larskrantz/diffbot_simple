@@ -73,7 +73,7 @@ response = image.single_image url: url
 
 # Product API
 product = client.product
-response = product.single_product url: url
+response = product.request url: url
 
 # Crawlbot API
 crawlbot = client.crawlbot
