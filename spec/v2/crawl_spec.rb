@@ -45,6 +45,17 @@ module DiffbotSimple::V2
 				subject.notifyEmail = "foo@b.ar"
 			end
 		end
+		context "when asking for current value as method call" do
+			it "should return an existing parameter" do
+				expect(subject.downloadJson).to eql "download_url"
+			end
+		end
+		context "when asking to refresh" do
+			it "should ask api for parameters" do
+				expect(crawlbot_api).to receive(:single).with(name: name).and_return({})
+				subject.refresh
+			end
+		end
 		context "when updating several properties at once" do
 			it "should send them to crawl api" do
 				expect(crawlbot_api).to receive(:single).with(name: name, notifyEmail: "foo@b.ar", repeat: 7.0).and_return({})

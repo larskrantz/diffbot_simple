@@ -29,10 +29,17 @@ module DiffbotSimple::V2
 		def results
 			crawlbot_api.results url: parameters[:downloadJson]
 		end
+		def refresh
+			send_to_api
+		end
+		def apiUrl= api_url
+			send_to_api apiUrl: api_url
+		end
 		def method_missing property, *args
-			property = property.to_s.gsub(/\=$/,"").to_sym
-			super unless parameters.has_key? property
-			send_to_api({ property => args.join(",") })
+			key = property.to_s.gsub(/\=$/,"").to_sym
+			super unless parameters.has_key? key
+			return send_to_api({ key => args.join(",") }) if property.to_s.match(/\=$/) or !args.empty?
+			return parameters[key]
 		end
 		private
 		attr_reader :crawlbot_api
