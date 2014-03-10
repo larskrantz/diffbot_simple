@@ -85,6 +85,7 @@ current_parameters = crawl.parameters
 # shorthand for using apiUrl, use the api object from client, 
 # it will create a correct value for you 
 # (custom, image, article, product or analyze for automatic)
+crawl.apiUrl = product # the object from above
 # A call to client.crawl name: "mycrawl" will create if not exists (works with a symbol too, client.crawl name: :mycrawl)
 # To update parameters: 
 craw.update onlyProcessIfNew: 0, seeds: "http://www.upptec.se", apiUrl: custom
@@ -106,6 +107,9 @@ all_my_bulk_jobs = client.bulk
 bulk = client.bulk name: "mycrawl"
 current_parameters = bulk.parameters
 # and so forth as crawlbot above.
+# however, you can add urls to process as an array using the #process method:
+bulk.process ["http://foo.bar", "http://bar.foo"] 
+
 ```
 
 ### On error

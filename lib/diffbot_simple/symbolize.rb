@@ -1,6 +1,5 @@
 module DiffbotSimple
 	module Symbolize
-		private
     def y_combinator(&f)
       lambda do |g|
         f.call {|*args| g[g][*args]}
@@ -25,5 +24,6 @@ module DiffbotSimple
 	    end
   	  sym_hash.call hash
   	end
+  	module_function :symbolize, :y_combinator
 	end
 end

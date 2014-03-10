@@ -45,5 +45,12 @@ module DiffbotSimple::V2
 				subject.update notifyEmail: "foo@b.ar", repeat: 7.0
 			end
 		end
+		context "when adding an array of urls to process" do
+			let(:urls) {["http://foo.bar", "http://bar.foo"]}
+			it "should send them space delimited to bulk api" do
+				expect(bulk_api).to receive(:single).with(name: name, urls: urls.join(" ")).and_return({})
+				subject.process urls
+			end
+		end
 	end
 end

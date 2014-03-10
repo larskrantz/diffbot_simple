@@ -23,6 +23,10 @@ module DiffbotSimple::V2
 		def update **parameters
 			send_to_api parameters
 		end
+		def process urls_to_process
+			urls_to_process = [urls_to_process] unless urls_to_process.respond_to? :join
+			send_to_api urls: urls_to_process.join(" ")
+		end
 		def results
 			bulk_api.results url: parameters[:downloadJson]
 		end
