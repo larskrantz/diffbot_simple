@@ -16,8 +16,8 @@ module DiffbotSimple::V2
 			it "should return the response body as an symbolized hash" do
 				expect(subject).to eql JSON.parse(single_response[:body], symbolize_names: true)
 			end
-			it "should respond and return the apis url in to_crawl_api_url" do
-				expect(image.to_crawl_api_url).to eql api_url
+			it "should respond and return the apis url in to_api_url" do
+				expect(image.to_api_url).to eql api_url
 			end
 		end
 		context "when asking for an image with no options" do

@@ -9,7 +9,7 @@ module DiffbotSimple::V2
 		def post_initialize
 			raise "Must overload to set api path"
 		end
-		def to_crawl_api_url
+		def to_api_url
 			"#{api_client.site}#{api}"
 		end
 		# overload if necessary
@@ -38,7 +38,7 @@ module DiffbotSimple::V2
 			merged
 		end
 		def expand_api_url api_url
-			return api_url.to_crawl_api_url if api_url.respond_to?(:to_crawl_api_url)
+			return api_url.to_api_url if api_url.respond_to?(:to_api_url)
 			return api_url
 		end
 		def raise_if_error_response result_from_diffbot

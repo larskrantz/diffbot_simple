@@ -5,7 +5,7 @@ module DiffbotSimple::V2
 		attr_reader :name
 		def initialize name: nil, **options
 			raise ArgumentError.new "Must pass a name for the custom api" unless name
-			@name = name
+			@name = name.to_s
 			super options
 		end
 		def post_initialize

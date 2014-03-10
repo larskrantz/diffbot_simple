@@ -22,8 +22,8 @@ module DiffbotSimple::V2
 			it "should return the response body as an symbolized hash" do
 				expect(subject).to eql JSON.parse(request_response[:body], symbolize_names: true)
 			end
-			it "should respond and return the apis url in to_crawl_api_url" do
-				expect(article.to_crawl_api_url).to eql api_url
+			it "should respond and return the apis url in to_api_url" do
+				expect(article.to_api_url).to eql api_url
 			end
 		end
 		context "when asking for a single article with no additional options" do

@@ -5,7 +5,7 @@ module DiffbotSimple::V2
 		def post_initialize
 			@api = :analyze
 		end
-		def to_crawl_api_url
+		def to_api_url
 			default = super
 			"#{default}?mode=auto"
 		end
