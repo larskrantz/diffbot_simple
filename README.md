@@ -86,7 +86,8 @@ current_parameters = crawl.parameters
 # it will create a correct value for you 
 # (custom, image, article, product or analyze for automatic)
 crawl.apiUrl = product # the object from above
-# A call to client.crawl name: "mycrawl" will create if not exists (works with a symbol too, client.crawl name: :mycrawl)
+# A call to client.crawl name: "mycrawl" will create if not exists 
+# (works with a symbol too, client.crawl name: :mycrawl)
 # To update parameters: 
 craw.update onlyProcessIfNew: 0, seeds: "http://www.upptec.se", apiUrl: custom
 # or by method, works only on loaded parameters
@@ -98,8 +99,9 @@ current_seeds = crawl.seeds
 crawl.pause
 crawl.unpause
 crawl.restart
-results = crawl.results # shorthand for downloading the json that are specifed in :downloadJson
-crawl.delete! name: "my_new_crawl" 
+# results is shorthand for downloading the json that are specifed in :downloadJson
+results = crawl.results 
+crawl.delete! 
 
 # Bulk API
 # is based on crawlbot and works exactly the same
