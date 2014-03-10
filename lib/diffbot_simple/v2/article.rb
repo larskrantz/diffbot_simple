@@ -5,7 +5,7 @@ module DiffbotSimple::V2
 		def post_initialize
 			@api = :article
 		end
-		def single_article url: nil, custom_headers: nil, body: nil, **options
+		def request url: nil, custom_headers: nil, body: nil, **options
 			raise ArgumentError.new "Must pass an url for the article api to fetch" unless url
 			if body
 				custom_headers ||= {}
