@@ -16,7 +16,7 @@ Send options to the api as named args, se usage below with article and fields-ar
 
 ## Installation
 ```ruby
-gem 'diffbot-simple'
+gem 'diffbot_simple'
 ```
 
 ## Dependencies
