@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "autotest-standalone"
   spec.add_development_dependency "webmock", "~> 1.17"
 
-  spec.add_runtime_dependency "rest-core", "~> 2.1"
+  spec.add_runtime_dependency "rest-core", "~> 3.3"
   spec.add_runtime_dependency "multi_json"
 
 end
